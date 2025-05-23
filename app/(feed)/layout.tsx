@@ -1,6 +1,9 @@
-import Home from "@/containers/Home";
+import { ReactNode } from "react";
+import type { Metadata } from "next";
 
-export const metadata = {
+import ClientLayout from "./HomeLayout";
+
+export const metadata: Metadata = {
   title: "Negara GenZ | Platform Sosial Masa Depan",
   description:
     "Gabung bersama Gen Z lainnya dan eksplorasi masa depan sosial media.",
@@ -38,11 +41,9 @@ export const metadata = {
   metadataBase: new URL("https://negara-genz.com"),
 };
 
-export default function HomePage() {
-  // return (
-  //   <>
-  //     <h1 className="bg-white dark:bg-red-400">MAIN</h1>
-  //   </>
-  // );
-  return <Home />;
+export default function FeedLayout({ children }: { children: ReactNode }) {
+  return (
+    // ❗️Jangan langsung return ClientComponent
+    <ClientLayout>{children}</ClientLayout>
+  );
 }

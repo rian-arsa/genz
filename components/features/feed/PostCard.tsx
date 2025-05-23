@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Sparkles, X } from "lucide-react";
 import PostActions from "./PostAction";
 import { JSX, useState } from "react";
-import { CommentItem } from "@/components/ui";
+import { CommentItem, PostHeader } from "@/components/ui";
 import { Dialog } from "@headlessui/react";
 
 interface Reply {
@@ -129,30 +129,10 @@ export default function PostCard({
           className="rounded-full object-cover border"
         />
         <div className="flex-1">
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-900 dark:text-white flex items-center gap-1 font-bold">
-              {post.author.name}
-              {true && (
-                <span className="text-blue-500">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    className="w-4 h-4">
-                    <path d="M22 12l-2.3-2 1-3-3-1-1-3-3 1-2-2-2 2-3-1-1 3-3 1 1 3-2 2 2 2-1 3 3 1 1 3 3-1 2 2 2-2 3 1 1-3 3-1-1-3zM10 16l-4-4 1.4-1.4 2.6 2.6 5.6-5.6L17 9l-7 7z" />
-                  </svg>
-                </span>
-              )}
-            </p>
-
-            <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
-              {audienceIcons[post.audience]}
-              {post.date}
-            </span>
-          </div>
+          <PostHeader post={post} audienceIcons={audienceIcons} />
 
           <div
-            className="mt-2 text-sm text-gray-800 dark:text-gray-200 leading-relaxed prose dark:prose-invert"
+            className="mt-4 text-sm text-gray-800 dark:text-gray-200 leading-relaxed prose dark:prose-invert"
             dangerouslySetInnerHTML={{ __html: post.html }}
           />
 
@@ -166,6 +146,8 @@ export default function PostCard({
             liked={post.liked}
             likeCount={post.likeCount}
             onLike={() => onLike(post.id)}
+            commentCount={post.comments.length}
+            shareCount={0}
           />
 
           <div className="mt-4 space-y-3">

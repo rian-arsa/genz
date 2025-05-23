@@ -1,2 +1,3 @@
-export { default as Header } from "./Header";
+export * from "./HeaderFeature";
+export * from "./HeaderTrigger"
 export { default as HeaderBottom } from "./HeaderBottom";

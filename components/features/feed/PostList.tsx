@@ -217,7 +217,7 @@ export default function PostFeed() {
   };
 
   return (
-    <div className="space-y-6 mt-6">
+    <div className="space-y-6 mt-6 overflow-x-hidden">
       {posts.map((post) => (
         <PostCard
           key={post.id}
