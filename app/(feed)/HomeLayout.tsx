@@ -24,7 +24,7 @@ export default function ClientLayout({
       ) : (
         <div className="flex flex-row gap-4 w-full">
           <Sidebar />
-          <main className="flex-1 p-4 py-20 pr-96">{children}</main>
+          <main className="flex-1 p-4 py-20 xl:pr-96">{children}</main>
         </div>
       )}
     </section>

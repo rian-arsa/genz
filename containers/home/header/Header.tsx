@@ -14,6 +14,7 @@ import {
   Settings,
   LogOut,
   X,
+  ShoppingCart,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useIsMobile } from "@/context/isMobileContextProvider";
@@ -84,11 +85,13 @@ export default function Header({ setIsShow, isShow }: THeaderProps) {
           <HeaderItemIcon
             IconName={X}
             onClick={() => setIsShow && setIsShow(false)}
+            label="Tutup Menu"
           />
         ) : (
           <HeaderItemIcon
             IconName={Menu}
             onClick={() => setIsShow && setIsShow(true)}
+            label="Buka Menu"
           />
         )}
         <div className="flex items-center space-x-4">
@@ -98,7 +101,11 @@ export default function Header({ setIsShow, isShow }: THeaderProps) {
             IconNameOn={Sun}
             IconNameOff={Moon}
           />
-          <HeaderItemIcon IconName={Search} onClick={() => {}} />
+          <HeaderItemIcon
+            IconName={Search}
+            onClick={() => {}}
+            label="Cari info"
+          />
         </div>
       </header>
     );
@@ -110,10 +117,26 @@ export default function Header({ setIsShow, isShow }: THeaderProps) {
 
       <div className="flex flex-1 items-center justify-center space-x-4 mx-4">
         <div className="hidden sm:flex items-center space-x-4">
-          <HeaderItemIcon IconName={Home} onClick={() => {}} />
-          <HeaderItemIcon IconName={MessageSquare} onClick={() => {}} />
-          <HeaderItemIcon IconName={Users} onClick={() => {}} />
-          <HeaderItemIcon IconName={Globe} onClick={() => {}} />
+          <HeaderItemIcon
+            IconName={Home}
+            onClick={() => {}}
+            label="Gosip terbaru"
+          />
+          <HeaderItemIcon
+            IconName={Users}
+            onClick={() => {}}
+            label="Organisasi Warga"
+          />
+          <HeaderItemIcon
+            IconName={MessageSquare}
+            onClick={() => {}}
+            label="Diskusi Warga"
+          />
+          <HeaderItemIcon
+            IconName={ShoppingCart}
+            onClick={() => {}}
+            label="Pasar Warga"
+          />
         </div>
         <div className="w-full max-w-md">
           <HeaderSearch

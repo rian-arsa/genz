@@ -84,7 +84,7 @@ export default function PostInputBox() {
                 <p className="font-semibold text-gray-800 dark:text-white">
                   Budi LinkedIn
                 </p>
-                <AudienceSelector value={audience} onChange={setAudience} />
+                {/* <AudienceSelector value={audience} onChange={setAudience} /> */}
               </div>
             </div>
 
