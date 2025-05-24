@@ -1,78 +1,58 @@
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, Sparkles, X } from "lucide-react";
-import PostActions from "./PostAction";
+"use client";
+
 import { JSX, useState } from "react";
-import { CommentItem, PostHeader } from "@/components/ui";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Dialog } from "@headlessui/react";
 
-interface Reply {
-  id: number;
-  text: string;
-  author: string;
-  liked: boolean;
-}
+import PostActions from "./PostAction";
+import PostHeader from "./PostHeader";
 
-type Comment = {
-  id: number;
-  text: string;
-  author: string;
-  replies?: Reply[];
-};
+import { PostContentText, TVerifiedTier } from "@/components/ui";
+import { useRouter } from "next/navigation";
 
-type Author = {
+export type TAuthor = {
   name: string;
+  username: string;
   avatar: string;
+  status: string;
+  isFollowing: boolean;
+  badge: TVerifiedTier | "";
 };
 
-type Post = {
-  id: number;
-  author: Author;
+export type TPost = {
+  id: string;
+  author: TAuthor;
   html: string;
   images: string[];
   audience: "public" | "connections" | "private";
   date: string;
-  liked: boolean;
+  isLiked: boolean;
   likeCount: number;
-  comments: Comment[];
+  commentCount: number;
+  shareCount: number;
+  isSaved: boolean;
 };
 
-const audienceIcons: Record<Post["audience"], JSX.Element> = {
+const audienceIcons: Record<TPost["audience"], JSX.Element> = {
   public: <span className="text-xs text-gray-400">🌍</span>,
   connections: <span className="text-xs text-gray-400">👥</span>,
   private: <span className="text-xs text-gray-400">🔒</span>,
 };
 
 interface PostCardProps {
-  post: Post;
-  onLike: (id: number) => void;
-  onCommentSubmit: (id: number, text: string) => void;
-  onShowMore: (id: number) => void;
-  commentValue: string;
-  onCommentChange: (id: number, text: string) => void;
-  visibleCount: number;
-  onCommentReplySubmit: (
-    postId: number,
-    commentId: number,
-    text: string
-  ) => void;
+  post: TPost;
 }
 
-export default function PostCard({
-  post,
-  onLike,
-  onCommentSubmit,
-  onShowMore,
-  commentValue,
-  onCommentChange,
-  visibleCount,
-  onCommentReplySubmit,
-}: PostCardProps) {
-  const visibleComments = post.comments.slice(0, visibleCount);
-  const hasMoreComments = post.comments.length > visibleCount;
+export default function PostCard({ post }: PostCardProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
 
-  const openLightbox = (index: number) => {
+  const router = useRouter();
+
+  const openLightbox = (index: number, event: React.MouseEvent) => {
+    event.stopPropagation();
+
     setCurrentImage(index);
     setLightboxOpen(true);
   };
@@ -97,7 +77,7 @@ export default function PostCard({
           <div
             key={index}
             className="relative cursor-pointer"
-            onClick={() => openLightbox(index)}>
+            onClick={(e) => openLightbox(index, e)}>
             <Image
               src={img}
               alt={`post image ${index}`}
@@ -118,9 +98,13 @@ export default function PostCard({
     );
   };
 
+  const onClickDetail = () => {
+    router.push(`/post/${post.id}`);
+  };
+
   return (
     <div className="bg-white dark:bg-[#1f1f1f] border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm">
-      <div className="flex items-start gap-3">
+      <div className="flex items-start gap-3" onClick={onClickDetail}>
         <Image
           src={post.author.avatar}
           alt={post.author.name}
@@ -130,63 +114,27 @@ export default function PostCard({
         />
         <div className="flex-1">
           <PostHeader post={post} audienceIcons={audienceIcons} />
+          <PostContentText html={post.html} />
 
-          <div
-            className="mt-4 text-sm text-gray-800 dark:text-gray-200 leading-relaxed prose dark:prose-invert"
-            dangerouslySetInnerHTML={{ __html: post.html }}
-          />
+          {post.images.length > 0 && post.images.length === 1 && (
+            <div className="mt-3 grid grid-cols-3 gap-2">
+              {post.images.length > 0 && renderImages()}
+            </div>
+          )}
 
-          {post.images.length > 0 && (
+          {post.images.length > 0 && post.images.length === 2 && (
             <div className="mt-3 grid grid-cols-1 gap-2">
               {post.images.length > 0 && renderImages()}
             </div>
           )}
 
-          <PostActions
-            liked={post.liked}
-            likeCount={post.likeCount}
-            onLike={() => onLike(post.id)}
-            commentCount={post.comments.length}
-            shareCount={0}
-          />
-
-          <div className="mt-4 space-y-3">
-            {visibleComments.map((comment) => (
-              <CommentItem
-                key={comment.id}
-                author={comment.author}
-                text={comment.text}
-                liked={false} // Assuming no like functionality for comments yet
-                onLike={() => {}}
-                onReplySubmit={(text) =>
-                  onCommentReplySubmit(post.id, comment.id, text)
-                }
-                replies={comment.replies || []}
-              />
-            ))}
-
-            {hasMoreComments && (
-              <button
-                onClick={() => onShowMore(post.id)}
-                className="text-xs text-blue-600 hover:underline">
-                View more comments
-              </button>
-            )}
-
-            <div className="flex gap-2 items-start mt-2">
-              <input
-                value={commentValue}
-                onChange={(e) => onCommentChange(post.id, e.target.value)}
-                placeholder="💬 Add your hot take..."
-                className="flex-1 rounded-full bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-gray-600 px-4 py-2 text-sm text-gray-800 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
-              />
-              <button
-                onClick={() => onCommentSubmit(post.id, commentValue)}
-                className="px-3 py-2 text-xs font-semibold bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
-                🚀 Post
-              </button>
+          {post.images.length > 0 && post.images.length === 3 && (
+            <div className="mt-3 grid grid-cols-1 gap-2">
+              {post.images.length > 0 && renderImages()}
             </div>
-          </div>
+          )}
+
+          <PostActions {...post} />
         </div>
       </div>
 

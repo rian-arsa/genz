@@ -1,1 +1,1 @@
-export { default as PostHeader } from "./PostHeader";
+export * from "./PostContentText"

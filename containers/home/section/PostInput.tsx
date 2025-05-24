@@ -2,14 +2,9 @@
 
 import { useCallback, useState } from "react";
 import Image from "next/image";
-import clsx from "clsx";
 import dynamic from "next/dynamic";
 
-import {
-  AudienceSelector,
-  MultiImageUploader,
-  SendPostButtons,
-} from "@/components/ui";
+import { MultiImageUploader, SendPostButtons } from "@/components/ui";
 
 const TiptapEditor = dynamic(
   () => import("@/components/ui").then((mod) => mod.TiptapEditor),
@@ -45,7 +40,7 @@ export default function PostInputBox() {
 
   return (
     <>
-      <div className="relative w-full overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-white to-gray-50 dark:from-[#1f1f1f] dark:to-[#232323] shadow-md p-4 hover:shadow-lg transition-shadow">
+      <div className="relative w-full overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-white to-gray-50 dark:from-[#1f1f1f] dark:to-[#232323] shadow-md p-4 hover:shadow-lg transition-shadow mb-4">
         <div className="flex items-center gap-4">
           <Image
             src="/images/avatar1.jpg"

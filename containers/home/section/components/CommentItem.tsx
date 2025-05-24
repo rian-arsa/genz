@@ -4,26 +4,29 @@ import { useState } from "react";
 import { Heart, MessageCircle } from "lucide-react";
 
 interface Reply {
-  id: number;
+  id: string;
   author: string;
   text: string;
   liked: boolean;
+  likeCount: number;
 }
 
 interface CommentItemProps {
   author: string;
   text: string;
   liked: boolean;
+  likeCount: number;
   onLike: () => void;
   onReplySubmit: (replyText: string) => void;
   replies?: Reply[];
-  onReplyLike?: (replyId: number) => void;
+  onReplyLike?: (replyId: string) => void;
 }
 
 export default function CommentItem({
   author,
   text,
   liked,
+  likeCount,
   onLike,
   onReplySubmit,
   replies = [],
@@ -31,12 +34,17 @@ export default function CommentItem({
 }: CommentItemProps) {
   const [showReply, setShowReply] = useState(false);
   const [replyText, setReplyText] = useState("");
+  const [visibleReplies, setVisibleReplies] = useState(3);
 
   const handleReply = () => {
     if (!replyText.trim()) return;
     onReplySubmit(replyText);
     setReplyText("");
     setShowReply(false);
+  };
+
+  const handleShowMoreReplies = () => {
+    setVisibleReplies((prev) => prev + 3);
   };
 
   return (
@@ -59,6 +67,9 @@ export default function CommentItem({
                 liked ? "text-pink-500" : ""
               }`}>
               <Heart size={14} fill={liked ? "#ec4899" : "none"} /> Like
+              {likeCount > 0 && (
+                <span className="font-semibold">{likeCount}</span>
+              )}
             </button>
             <button
               onClick={() => setShowReply(!showReply)}
@@ -73,7 +84,7 @@ export default function CommentItem({
                   type="text"
                   value={replyText}
                   onChange={(e) => setReplyText(e.target.value)}
-                  placeholder="Balas dengan sopan tapi nyelekit 😌"
+                  placeholder="Ayo bales, tapi jangan toxic ..."
                   className="flex-1 bg-transparent text-[14px] text-zinc-900 dark:text-white placeholder:text-zinc-400 focus:outline-none"
                 />
                 <button
@@ -105,7 +116,7 @@ export default function CommentItem({
 
           {replies.length > 0 && (
             <div className="mt-4 space-y-2 ml-6">
-              {replies.map((reply) => (
+              {replies.slice(0, visibleReplies).map((reply) => (
                 <div key={reply.id} className="flex items-start gap-2">
                   <div className="w-7 h-7 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center text-xs font-semibold text-gray-700 dark:text-gray-200">
                     {reply.author.charAt(0).toUpperCase()}
@@ -125,12 +136,22 @@ export default function CommentItem({
                       <Heart
                         size={12}
                         fill={reply.liked ? "#ec4899" : "none"}
-                      />{" "}
+                      />
                       Like
+                      {reply.likeCount > 0 && (
+                        <span className="font-semibold">{reply.likeCount}</span>
+                      )}
                     </button>
                   </div>
                 </div>
               ))}
+              {replies.length > visibleReplies && (
+                <button
+                  onClick={handleShowMoreReplies}
+                  className="text-xs text-pink-600 hover:underline ml-6">
+                  Lihat lanjutannya
+                </button>
+              )}
             </div>
           )}
         </div>

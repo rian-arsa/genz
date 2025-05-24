@@ -1,6 +1,6 @@
 "use client";
 
-import { HeaderTrigger } from "@/components/features";
+import { HeaderBottom, HeaderTrigger } from "@/components/features";
 import { Sidebar } from "@/containers/home";
 import { useIsMobile } from "@/context/isMobileContextProvider";
 
@@ -27,6 +27,8 @@ export default function ClientLayout({
           <main className="flex-1 p-4 py-20 xl:pr-96">{children}</main>
         </div>
       )}
+
+      <HeaderBottom />
     </section>
   );
 }

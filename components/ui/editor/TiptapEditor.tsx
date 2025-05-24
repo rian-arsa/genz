@@ -1,3 +1,5 @@
+"use client";
+
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -56,6 +58,28 @@ export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
         placeholder:
           "Tulis rahasia negara, drama kantor, atau gosip tetangga di sini... 😏🔥",
       },
+      handleKeyDown(view, event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+          event.preventDefault();
+          const { state, dispatch } = view;
+          const { $from } = state.selection;
+          const parentText = $from.parent.textContent || "";
+          const isEmpty = parentText.trim() === "";
+
+          if (isEmpty) {
+            // Double enter → split to new paragraph
+            view.dispatch(state.tr.split($from.pos));
+          } else {
+            // Single enter → insert <br>
+            const br = state.schema.nodes.hardBreak.create();
+            dispatch(state.tr.replaceSelectionWith(br).scrollIntoView());
+          }
+
+          return true;
+        }
+
+        return false;
+      },
     },
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
@@ -66,6 +90,12 @@ export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
     if (editor && !hasLoaded.current) {
       editor.commands.setContent(content || "");
       hasLoaded.current = true;
+    }
+  }, [editor]);
+
+  useEffect(() => {
+    if (editor && editor.isEmpty) {
+      editor.commands.setContent("<p></p>");
     }
   }, [editor]);
 

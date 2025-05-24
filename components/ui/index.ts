@@ -9,6 +9,7 @@ export { default as AudienceSelector } from "./selector/AudienceSelector";
 
 export { default as CommentItem } from "./comment/CommentItem";
 
-export * from "./feed"
-export * from "./sidebar"
-export * from "./header"
+export * from "./feed";
+export * from "./sidebar";
+export * from "./header";
+export * from "./icons";

@@ -7,48 +7,50 @@ import { SidebarCollapseGroup } from "@/components";
 export type TLeftSidebarProps = {};
 
 export default function Sidebar() {
-  return (
-    <aside className="w-full md:w-72 xl:w-80 p-4 space-y-2 pt-20">
-      <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1f1f1f] shadow-sm p-4 space-y-4">
-        <div className="flex items-center gap-3">
-          <Image
-            src="/images/avatar1.jpg"
-            alt="Avatar"
-            width={48}
-            height={48}
-            className="rounded-full object-cover border"
-          />
-          <div>
-            <p className="text-sm font-semibold text-gray-900 dark:text-white flex items-center gap-1">
-              Budi LinkedIn
-              <BadgeCheck className="w-4 h-4 text-primary" />
-            </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              Warga Aktif
-            </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              Jakarta, Negara Gen Z
-            </p>
-          </div>
-        </div>
-        <div className="text-center border-t border-gray-100 dark:border-gray-800 pt-4">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            Dompet Saya
+  const ProfileSidebar = (
+    <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1f1f1f] shadow-sm p-4 space-y-4">
+      <div className="flex items-center gap-3">
+        <Image
+          src="/images/avatar1.jpg"
+          alt="Avatar"
+          width={48}
+          height={48}
+          className="rounded-full object-cover border"
+        />
+        <div>
+          <p className="text-sm font-semibold text-gray-900 dark:text-white flex items-center gap-1">
+            Budi LinkedIn
+            <BadgeCheck className="w-4 h-4 text-primary" />
           </p>
-          <p className="text-2xl font-bold text-primary pt-2">💰 1,240</p>
-        </div>
-        <div className="text-center space-x-2">
-          <button className="text-xs font-medium text-primary hover:underline cursor-pointer">
-            Belanja
-          </button>
-          <span>
-            <span className="text-xs text-gray-400">|</span>
-          </span>
-          <button className="text-xs font-medium text-primary hover:underline cursor-pointer">
-            Riwayat
-          </button>
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Warga Aktif
+          </p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Jakarta, Negara Gen Z
+          </p>
         </div>
       </div>
+      <div className="text-center border-t border-gray-100 dark:border-gray-800 pt-4">
+        <p className="text-xs text-gray-500 dark:text-gray-400">Dompet Saya</p>
+        <p className="text-2xl font-bold text-primary pt-2">💰 1,240</p>
+      </div>
+      <div className="text-center space-x-2">
+        <button className="text-xs font-medium text-primary hover:underline cursor-pointer">
+          Belanja
+        </button>
+        <span>
+          <span className="text-xs text-gray-400">|</span>
+        </span>
+        <button className="text-xs font-medium text-primary hover:underline cursor-pointer">
+          Riwayat
+        </button>
+      </div>
+    </div>
+  );
+
+  return (
+    <aside className="w-full md:w-72 xl:w-80 p-4 space-y-2 pt-20">
+      {ProfileSidebar}
 
       {/* Section 2: Agenda Warga */}
       {/* <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1f1f1f] shadow-sm p-4">
