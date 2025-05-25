@@ -24,9 +24,11 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post, audienceIcons }) => {
   };
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between w-full">
       <div className="flex flex-col">
-        <p className="text-sm text-gray-900 dark:text-white flex items-center gap-1 font-bold">
+        <p
+          className="text-sm text-gray-900 dark:text-white flex items-center gap-1 font-bold hover:underline"
+          onClick={(e) => e.stopPropagation()}>
           <Link href={`/${post.author.username}`} className="cursor-pointer">
             {post.author.name}
           </Link>

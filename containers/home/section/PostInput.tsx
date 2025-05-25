@@ -24,12 +24,6 @@ export default function PostInputBox() {
 
   const handleSubmit = (isAnonymous: boolean) => {
     setLoading(true);
-    console.log("Posting", {
-      as: isAnonymous ? "anonymous" : "user",
-      html,
-      files,
-      audience,
-    });
     setTimeout(() => {
       setIsModalOpen(false);
       setHtml("");

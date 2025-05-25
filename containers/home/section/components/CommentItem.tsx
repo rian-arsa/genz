@@ -16,10 +16,10 @@ interface CommentItemProps {
   text: string;
   liked: boolean;
   likeCount: number;
-  onLike: () => void;
-  onReplySubmit: (replyText: string) => void;
+  onLike: (e: React.MouseEvent) => void;
+  onReplySubmit: (e: React.MouseEvent, replyText: string) => void;
   replies?: Reply[];
-  onReplyLike?: (replyId: string) => void;
+  onReplyLike?: (e: React.MouseEvent, replyId: string) => void;
 }
 
 export default function CommentItem({
@@ -36,14 +36,16 @@ export default function CommentItem({
   const [replyText, setReplyText] = useState("");
   const [visibleReplies, setVisibleReplies] = useState(3);
 
-  const handleReply = () => {
+  const handleReply = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!replyText.trim()) return;
-    onReplySubmit(replyText);
+    onReplySubmit(e, replyText);
     setReplyText("");
     setShowReply(false);
   };
 
-  const handleShowMoreReplies = () => {
+  const handleShowMoreReplies = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     setVisibleReplies((prev) => prev + 3);
   };
 
@@ -58,11 +60,15 @@ export default function CommentItem({
             {author}
           </p>
           <p className="text-sm text-gray-700 dark:text-gray-300 mt-0.5">
-            {text}
+            {typeof text === "string" ? text : String(text)}
           </p>
+
           <div className="flex items-center gap-4 mt-2 text-xs text-gray-500 dark:text-gray-400">
             <button
-              onClick={onLike}
+              onClick={(e) => {
+                e.stopPropagation();
+                onLike(e);
+              }}
               className={`flex items-center gap-1 hover:text-pink-500 ${
                 liked ? "text-pink-500" : ""
               }`}>
@@ -72,14 +78,17 @@ export default function CommentItem({
               )}
             </button>
             <button
-              onClick={() => setShowReply(!showReply)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowReply(!showReply);
+              }}
               className="flex items-center gap-1 hover:text-blue-500">
               <MessageCircle size={14} /> Reply
             </button>
           </div>
           {showReply && (
             <div className="mt-4 flex flex-col gap-3">
-              <div className="flex items-center justify-between gap-3 border border-zinc-200 dark:border-zinc-700 rounded-full px-4 py-2 w-full shadow-[0_4px_6px_-4px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_6px_-4px_rgba(255,255,255,0.05)] focus-within:ring-2 focus-within:ring-pink-500 transition">
+              <div className="flex items-center justify-between gap-3 border border-zinc-200 dark:border-zinc-700 rounded-full px-4 py-2 w-full shadow focus-within:ring-2 focus-within:ring-pink-500 transition">
                 <input
                   type="text"
                   value={replyText}
@@ -105,9 +114,11 @@ export default function CommentItem({
                   </svg>
                 </button>
               </div>
-
               <button
-                onClick={() => setShowReply(false)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowReply(false);
+                }}
                 className="self-start text-xs text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition">
                 Batal
               </button>
@@ -129,7 +140,10 @@ export default function CommentItem({
                       {reply.text}
                     </p>
                     <button
-                      onClick={() => onReplyLike?.(reply.id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onReplyLike?.(e, reply.id);
+                      }}
                       className={`mt-1 text-xs flex items-center gap-1 hover:text-pink-500 ${
                         reply.liked ? "text-pink-500" : "text-gray-400"
                       }`}>

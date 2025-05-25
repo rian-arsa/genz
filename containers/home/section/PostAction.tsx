@@ -63,7 +63,9 @@ export default function PostAction({
   };
 
   return (
-    <div className="mt-6 border-t border-gray-100 dark:border-gray-700 pt-4 text-sm text-gray-600 dark:text-gray-300">
+    <div
+      className="mt-6 border-t border-gray-100 dark:border-gray-700 pt-4 text-sm text-gray-600 dark:text-gray-300"
+      onClick={(e) => e.stopPropagation()}>
       <div className="flex items-center justify-between mb-1">
         <div className="flex gap-2 items-center">
           <PostActionItem

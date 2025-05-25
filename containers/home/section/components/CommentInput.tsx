@@ -10,16 +10,21 @@ export default function CommentInput({
   onCommentSubmit,
 }: {
   id: string;
-  onCommentSubmit: (id: string, comment: string) => void;
+  onCommentSubmit: (
+    e: React.MouseEvent | React.FormEvent,
+    id: string,
+    comment: string
+  ) => void;
 }) {
   const [comment, setComment] = useState("");
   const [sent, setSent] = useState(false);
   const [showEmoji, setShowEmoji] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e?: React.MouseEvent | React.FormEvent) => {
+    e?.stopPropagation();
     if (!comment.trim()) return;
 
-    onCommentSubmit(id, comment);
+    onCommentSubmit(e!, id, comment);
     setSent(true);
     setComment("");
     setTimeout(() => setSent(false), 1500);
@@ -28,12 +33,21 @@ export default function CommentInput({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSubmit();
+      handleSubmit(e);
     }
   };
 
   const addEmoji = (emoji: any) => {
-    setComment((prev) => prev + emoji.native);
+    const emojiChar =
+      emoji?.native ||
+      (emoji?.unified
+        ? emoji.unified
+            .split("-")
+            .map((u: string) => String.fromCodePoint(parseInt(u, 16)))
+            .join("")
+        : "");
+
+    setComment((prev) => prev + emojiChar);
     setShowEmoji(false);
   };
 
@@ -50,7 +64,10 @@ export default function CommentInput({
         />
         <button
           type="button"
-          onClick={() => setShowEmoji((prev) => !prev)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowEmoji((prev) => !prev);
+          }}
           className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 text-xl transition"
           title="Emoji">
           😊

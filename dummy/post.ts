@@ -12,7 +12,7 @@ export const DUMMY_POSTS: TPost[] = [
       username: "budi_linekd",
     },
     html: "<p>This is my first post using <strong>Tiptap</strong> editor! 🎉</p>",
-    images: ["/images/sample1.jpg", "/images/sample2.jpg", "/images/sample3.jpg"],
+    images: ["/images/sample1.jpg", "/images/sample2.jpg", "/images/sample3.jpg", "/images/sample2.jpg", "/images/sample3.jpg"],
     audience: "public",
     date: new Date(Date.now() - 1 * 60 * 1000).toISOString(), // 1 menit lalu
     isLiked: false,

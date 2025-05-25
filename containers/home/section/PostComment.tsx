@@ -46,14 +46,24 @@ export default function PostComment({
   const visibleOldComments = initialComments.slice(0, visibleCount);
   const hasMoreComments = initialComments.length > visibleCount;
 
-  const onShowMore = () => {
+  const onShowMore = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     setVisibleCount((prev) => prev + 3);
   };
 
-  const onCommentSubmit = (postId: string, commentText: string) => {
+  const onCommentSubmit = (
+    e: React.MouseEvent | React.FormEvent,
+    postId: string,
+    commentText: string
+  ) => {
+    e.stopPropagation();
+
+    const commentAsString =
+      typeof commentText === "string" ? commentText : String(commentText);
+
     const newComment: TComment = {
       id: Date.now().toString(),
-      text: commentText,
+      text: commentAsString,
       author: "You",
       liked: false,
       likeCount: 0,
@@ -63,7 +73,8 @@ export default function PostComment({
     setNewComments((prev) => [newComment, ...prev]);
   };
 
-  const handleLikeComment = (commentId: string) => {
+  const handleLikeComment = (e: React.MouseEvent, commentId: string) => {
+    e.stopPropagation();
     const update = (comments: TComment[]) =>
       comments.map((comment) =>
         comment.id === commentId
@@ -76,15 +87,19 @@ export default function PostComment({
             }
           : comment
       );
-
     setInitialComments((prev) => update(prev));
     setNewComments((prev) => update(prev));
   };
 
-  const handleReplySubmit = (commentId: string, text: string) => {
+  const handleReplySubmit = (
+    e: React.MouseEvent,
+    commentId: string,
+    text: string
+  ) => {
+    e.stopPropagation();
     const newReply: TReply = {
       id: Date.now().toString(),
-      text,
+      text: String(text),
       author: "You",
       liked: false,
       likeCount: 0,
@@ -99,12 +114,16 @@ export default function PostComment({
             }
           : comment
       );
-
     setInitialComments((prev) => updateReplies(prev));
     setNewComments((prev) => updateReplies(prev));
   };
 
-  const handleLikeReply = (commentId: string, replyId: string) => {
+  const handleLikeReply = (
+    e: React.MouseEvent,
+    commentId: string,
+    replyId: string
+  ) => {
+    e.stopPropagation();
     const update = (comments: TComment[]) =>
       comments.map((comment) =>
         comment.id === commentId
@@ -124,7 +143,6 @@ export default function PostComment({
             }
           : comment
       );
-
     setInitialComments((prev) => update(prev));
     setNewComments((prev) => update(prev));
   };
@@ -143,12 +161,10 @@ export default function PostComment({
             text={comment.text}
             liked={comment.liked}
             likeCount={comment.likeCount}
-            onLike={() => handleLikeComment(comment.id)}
-            onReplySubmit={(text: string) =>
-              handleReplySubmit(comment.id, text)
-            }
-            onReplyLike={(replyId: string) =>
-              handleLikeReply(comment.id, replyId)
+            onLike={(e) => handleLikeComment(e, comment.id)}
+            onReplySubmit={(e, text) => handleReplySubmit(e, comment.id, text)}
+            onReplyLike={(e, replyId) =>
+              handleLikeReply(e, comment.id, replyId)
             }
             replies={comment.replies || []}
           />
@@ -156,14 +172,17 @@ export default function PostComment({
 
         {hasMoreComments && (
           <button
-            onClick={onShowMore}
+            onClick={(e) => onShowMore(e)}
             className="text-xs text-pink-600 hover:underline">
             Lihat lanjutannya
           </button>
         )}
       </div>
 
-      <CommentInput id={id.toString()} onCommentSubmit={onCommentSubmit} />
+      <CommentInput
+        id={id.toString()}
+        onCommentSubmit={(e, id, text) => onCommentSubmit(e, id, text)}
+      />
     </>
   );
 }
