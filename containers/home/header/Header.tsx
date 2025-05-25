@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
 import {
   Bell,
@@ -27,6 +28,7 @@ import {
 } from "@/components/ui";
 import { HeaderNotif, HeaderProfil } from "@/components/features";
 import { dummyNotifItems } from "@/dummy/notif";
+import { useRouter } from "next/navigation";
 
 const MENUS_PROFIL: THeaderItemProfil[] = [
   {
@@ -55,6 +57,8 @@ export default function Header({ setIsShow, isShow }: THeaderProps) {
   const { theme, setTheme } = useTheme();
   const isMobile = useIsMobile();
 
+  const router = useRouter();
+
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showNotifDropdown, setShowNotifDropdown] = useState(false);
 
@@ -77,6 +81,10 @@ export default function Header({ setIsShow, isShow }: THeaderProps) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleClickHeaderItem = (url: string) => {
+    router.push(url);
+  };
 
   if (isMobile) {
     return (
@@ -119,12 +127,12 @@ export default function Header({ setIsShow, isShow }: THeaderProps) {
         <div className="hidden sm:flex items-center space-x-4">
           <HeaderItemIcon
             IconName={Home}
-            onClick={() => {}}
+            onClick={() => handleClickHeaderItem("/home")}
             label="Gosip terbaru"
           />
           <HeaderItemIcon
             IconName={Users}
-            onClick={() => {}}
+            onClick={() => handleClickHeaderItem("/orwa")}
             label="Organisasi Warga"
           />
           <HeaderItemIcon

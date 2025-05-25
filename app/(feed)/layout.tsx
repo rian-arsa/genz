@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
 
-import ClientLayout from "./HomeLayout";
+import ClientLayout from "./ClientWrapper";
 
 export const metadata: Metadata = {
   title: "Negara GenZ | Platform Sosial Masa Depan",
@@ -42,8 +42,5 @@ export const metadata: Metadata = {
 };
 
 export default function FeedLayout({ children }: { children: ReactNode }) {
-  return (
-    // ❗️Jangan langsung return ClientComponent
-    <ClientLayout>{children}</ClientLayout>
-  );
+  return <ClientLayout>{children}</ClientLayout>;
 }

@@ -2,14 +2,26 @@
 
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { SidebarCollapseSkeleton } from "./SidebarCollapseSkeleton";
 
 export type TSidebarCollapse = {
+  isLoading?: boolean;
   title: string;
   children: React.ReactNode;
+  isOpen?: boolean;
 };
 
-export const SidebarCollapse = ({ title, children }: TSidebarCollapse) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const SidebarCollapse = ({
+  isLoading = false,
+  title,
+  children,
+  isOpen = false,
+}: TSidebarCollapse) => {
+  const [isOpenState, setIsOpen] = useState<boolean>(isOpen || false);
+
+  if (isLoading) {
+    return <SidebarCollapseSkeleton />;
+  }
 
   return (
     <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1f1f1f] p-4 shadow-sm">
@@ -19,7 +31,7 @@ export const SidebarCollapse = ({ title, children }: TSidebarCollapse) => {
         <p className="text-sm font-semibold text-gray-900 dark:text-white">
           {title}
         </p>
-        {isOpen ? (
+        {isOpenState ? (
           <ChevronUp className="w-4 h-4 text-gray-500" />
         ) : (
           <ChevronDown className="w-4 h-4 text-gray-500" />
@@ -28,7 +40,7 @@ export const SidebarCollapse = ({ title, children }: TSidebarCollapse) => {
 
       <div
         className={`overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-40 mt-3" : "max-h-0"
+          isOpenState ? "max-h-40 mt-3" : "max-h-0"
         }`}>
         <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
           {children}
