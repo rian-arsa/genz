@@ -40,7 +40,7 @@ export const SidebarCollapse = ({
 
       <div
         className={`overflow-hidden transition-all duration-300 ${
-          isOpenState ? "max-h-40 mt-3" : "max-h-0"
+          isOpenState ? "mt-3" : "max-h-0"
         }`}>
         <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
           {children}

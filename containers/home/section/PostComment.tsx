@@ -17,6 +17,7 @@ export type TComment = {
   author: string;
   liked: boolean;
   likeCount: number;
+  replyCount: number;
   replies?: TReply[];
 };
 
@@ -67,6 +68,7 @@ export default function PostComment({
       author: "You",
       liked: false,
       likeCount: 0,
+      replyCount: 0,
       replies: [],
     };
 
@@ -166,6 +168,7 @@ export default function PostComment({
             onReplyLike={(e, replyId) =>
               handleLikeReply(e, comment.id, replyId)
             }
+            replyCount={comment.replyCount}
             replies={comment.replies || []}
           />
         ))}

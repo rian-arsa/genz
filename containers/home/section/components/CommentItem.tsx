@@ -16,6 +16,7 @@ interface CommentItemProps {
   text: string;
   liked: boolean;
   likeCount: number;
+  replyCount: number;
   onLike: (e: React.MouseEvent) => void;
   onReplySubmit: (e: React.MouseEvent, replyText: string) => void;
   replies?: Reply[];
@@ -30,6 +31,7 @@ export default function CommentItem({
   onLike,
   onReplySubmit,
   replies = [],
+  replyCount,
   onReplyLike,
 }: CommentItemProps) {
   const [showReply, setShowReply] = useState(false);
@@ -72,7 +74,7 @@ export default function CommentItem({
               className={`flex items-center gap-1 hover:text-pink-500 ${
                 liked ? "text-pink-500" : ""
               }`}>
-              <Heart size={14} fill={liked ? "#ec4899" : "none"} /> Like
+              <Heart size={14} fill={liked ? "#ec4899" : "none"} /> Suka
               {likeCount > 0 && (
                 <span className="font-semibold">{likeCount}</span>
               )}
@@ -83,7 +85,10 @@ export default function CommentItem({
                 setShowReply(!showReply);
               }}
               className="flex items-center gap-1 hover:text-blue-500">
-              <MessageCircle size={14} /> Reply
+              <MessageCircle size={14} /> Balas
+              {replyCount > 0 && (
+                <span className="font-semibold">{replyCount}</span>
+              )}
             </button>
           </div>
           {showReply && (
@@ -151,7 +156,7 @@ export default function CommentItem({
                         size={12}
                         fill={reply.liked ? "#ec4899" : "none"}
                       />
-                      Like
+                      Suka
                       {reply.likeCount > 0 && (
                         <span className="font-semibold">{reply.likeCount}</span>
                       )}

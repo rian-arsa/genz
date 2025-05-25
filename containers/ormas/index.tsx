@@ -1,4 +1,4 @@
-export { default } from "./OrwaContainer";
+export { default } from "./OrmasContainer";
 
 // sidebar
 export { default as OrwaSidebar } from "./sidebar/Sidebar";

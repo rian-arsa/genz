@@ -1,0 +1,122 @@
+export const DUMMY_MEMBER = [
+  {
+    id: "u1",
+    name: "Ayu Ramadhani",
+    avatarUrl: "/images/avatar1.jpg",
+    joinedAt: "2022-10-12",
+  },
+  {
+    id: "u2",
+    name: "Rizky Dwi",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2023-01-20",
+  },
+  {
+    id: "u3",
+    name: "Siti Nurhaliza",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2021-08-04",
+  },
+  {
+    id: "u4",
+    name: "Budi Santoso",
+    avatarUrl: "/images/avatar1.jpg",
+    joinedAt: "2020-05-15",
+  },
+  {
+    id: "u5",
+    name: "Dewi Lestari",
+    avatarUrl: "/images/avatar1.jpg",
+    joinedAt: "2022-11-30",
+  },
+  {
+    id: "u6",
+    name: "Eko Prabowo",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2023-03-10",
+  },
+  {
+    id: "u7",
+    name: "Fajar Nugroho",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2021-12-25",
+  },
+  {
+    id: "u8",
+    name: "Gita Anjani",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2022-07-14",
+  },
+  {
+    id: "u9",
+    name: "Hendra Wijaya",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2023-02-18",
+  },
+  {
+    id: "u10",
+    name: "Indah Permata",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2021-09-30",
+  },
+  {
+    id: "u11",
+    name: "Joko Susilo",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2020-11-11",
+  },
+  {
+    id: "u12",
+    name: "Kartika Dewi",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2023-04-05",
+  },
+  {
+    id: "u13",
+    name: "Lukman Hakim",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2022-06-20",
+  },
+  {
+    id: "u14",
+    name: "Maya Sari",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2021-03-15",
+  },
+  {
+    id: "u15",
+    name: "Nanda Pratama",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2023-05-22",
+  },
+  {
+    id: "u16",
+    name: "Oki Setiawan",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2020-08-18",
+  },
+  {
+    id: "u17",
+    name: "Putri Ayu",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2022-01-10",
+  },
+  {
+    id: "u18",
+    name: "Qori Amalia",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2021-07-07",
+  },
+  {
+    id: "u19",
+    name: "Rian Arsa",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2023-06-01",
+  },
+  {
+    id: "u20",
+    name: "Siti Aminah",
+    avatarUrl: "/images/avatar2.jpg",
+    joinedAt: "2020-12-19",
+  }
+]

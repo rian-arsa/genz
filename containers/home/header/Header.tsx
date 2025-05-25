@@ -132,18 +132,18 @@ export default function Header({ setIsShow, isShow }: THeaderProps) {
           />
           <HeaderItemIcon
             IconName={Users}
-            onClick={() => handleClickHeaderItem("/orwa")}
-            label="Organisasi Warga"
+            onClick={() => handleClickHeaderItem("/ormas")}
+            label="Organisasi Masyarakat"
           />
           <HeaderItemIcon
             IconName={MessageSquare}
             onClick={() => {}}
-            label="Diskusi Warga"
+            label="Diskusi Tetangga"
           />
           <HeaderItemIcon
             IconName={ShoppingCart}
             onClick={() => {}}
-            label="Pasar Warga"
+            label="Pasar Kampung"
           />
         </div>
         <div className="w-full max-w-md">

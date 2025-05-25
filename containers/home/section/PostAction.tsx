@@ -13,6 +13,10 @@ import { TPost } from "./PostCard";
 import PostComment from "./PostComment";
 import { PostActionItem } from "./components";
 
+type PostActionProps = TPost & {
+  isDetail?: boolean;
+};
+
 export default function PostAction({
   id,
   isLiked,
@@ -20,10 +24,11 @@ export default function PostAction({
   commentCount,
   shareCount,
   isSaved,
-}: TPost) {
+  isDetail = false,
+}: PostActionProps) {
   const [tempLike, setTempLike] = useState<boolean>(isLiked || false);
   const [tempSaved, setTempSaved] = useState<boolean>(isSaved || false);
-  const [openComment, setOpenComment] = useState<boolean>(false);
+  const [openComment, setOpenComment] = useState<boolean>(isDetail);
   const [tempLikeCount, setTempLikeCount] = useState<number>(likeCount || 0);
 
   const handleLike = (e: React.MouseEvent) => {
