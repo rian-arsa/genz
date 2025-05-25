@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { BadgeCheck } from "lucide-react";
-import { SidebarCollapseGroup } from "@/components";
+import { SidebarCollapse } from "@/components";
 
 export type TLeftSidebarProps = {};
 
@@ -70,13 +70,13 @@ export default function Sidebar() {
       </div> */}
 
       {/* Section 3: Parlemen Sosial */}
-      <SidebarCollapseGroup isLoading={false} title="Parlemen Sosial">
+      <SidebarCollapse isLoading={false} title="Parlemen Sosial">
         <div className="space-y-2">
           <p className="text-sm text-gray-700 dark:text-gray-300">
             Diskusikan isu-isu terkini di Parlemen Sosial.
           </p>
         </div>
-      </SidebarCollapseGroup>
+      </SidebarCollapse>
 
       {/* Section 4: Ormas Relevan */}
       {/* <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1f1f1f] p-4 shadow-sm">
