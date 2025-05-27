@@ -49,7 +49,7 @@ export default function Sidebar() {
   );
 
   return (
-    <aside className="w-full md:w-72 xl:w-80 p-4 space-y-2 pt-20">
+    <aside className="w-full md:w-72 xl:w-80 p-4 space-y-2 pt-20 mb-20">
       {ProfileSidebar}
 
       {/* Section 2: Agenda Warga */}

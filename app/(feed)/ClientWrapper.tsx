@@ -29,7 +29,7 @@ export default function ClientLayout({
           {children}
         </main>
       ) : (
-        <div className="flex flex-row w-full">
+        <section className="flex flex-row w-full">
           {URL_POST.some((url) => activeUrl.includes(url)) && <Sidebar />}
           {URL_ORWA.some((url) => activeUrl.includes(url)) && (
             <OrwaSidebar isLanding={false} />
@@ -38,7 +38,7 @@ export default function ClientLayout({
 
           {/* Main content area */}
           <main className="flex-1 p-4 py-20 xl:pr-96">{children}</main>
-        </div>
+        </section>
       )}
 
       <HeaderBottom />

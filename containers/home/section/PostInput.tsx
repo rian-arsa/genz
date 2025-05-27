@@ -46,7 +46,7 @@ export default function PostInputBox() {
           <button
             onClick={() => setIsModalOpen(true)}
             className="flex-1 text-left bg-gradient-to-r from-gray-100 to-gray-200 dark:from-[#2c2c2c] dark:to-[#3a3a3a] hover:from-gray-200 hover:to-gray-300 dark:hover:from-[#3a3a3a] dark:hover:to-[#444] text-sm text-gray-700 dark:text-gray-200 px-5 py-2 rounded-full transition-all shadow-sm hover:shadow-md">
-            ✨ What's on your mind?
+            ✨ Ada cerita apa hari ini?
           </button>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-pink-500 via-blue-500 to-teal-400 animate-[pulse_2s_infinite] rounded-b-xl" />

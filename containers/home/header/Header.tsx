@@ -137,7 +137,7 @@ export default function Header({ setIsShow, isShow }: THeaderProps) {
           />
           <HeaderItemIcon
             IconName={MessageSquare}
-            onClick={() => {}}
+            onClick={() => handleClickHeaderItem("/chat")}
             label="Diskusi Tetangga"
           />
           <HeaderItemIcon

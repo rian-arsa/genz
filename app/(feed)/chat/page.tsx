@@ -5,7 +5,7 @@ import ChatWindow from "./ChatWindow";
 
 export default function ChatPage() {
   return (
-    <div className="fixed top-20 left-0 md:left-72 xl:left-80 flex h-[85vh] w-[800px] bg-zinc-100 dark:bg-zinc-900 overflow-scroll rounded-xl">
+    <div className="fixed top-20 left-4 flex h-[85vh] w-full max-w-[70vw] bg-zinc-100 dark:bg-zinc-900 overflow-scroll rounded-xl">
       <Sidebar />
       <ChatWindow />
     </div>

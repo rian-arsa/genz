@@ -12,7 +12,7 @@ export const DUMMY_POSTS: TPost[] = [
       username: "budi_linekd",
     },
     html: "<p>This is my first post using <strong>Tiptap</strong> editor! 🎉</p>",
-    images: ["/images/sample1.jpg", "/images/sample2.jpg", "/images/sample3.jpg", "/images/sample2.jpg", "/images/sample3.jpg"],
+    images: ["/images/sample3.jpg", "/images/sample2.jpg", "/images/sample3.jpg", "/images/sample2.jpg", "/images/sample3.jpg"],
     audience: "public",
     date: new Date(Date.now() - 1 * 60 * 1000).toISOString(), // 1 menit lalu
     isLiked: false,
@@ -52,7 +52,7 @@ export const DUMMY_POSTS: TPost[] = [
       username: "charilie"
     },
     html: "",
-    images: ["/images/sample1.jpg", "/images/sample2.jpg", "/images/sample3.jpg"],
+    images: ["/images/sample3.jpg", "/images/sample2.jpg", "/images/sample3.jpg"],
     audience: "public",
     date: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
     isLiked: false,
@@ -72,7 +72,7 @@ export const DUMMY_POSTS: TPost[] = [
       username: "dina_techie"
     },
     html: "<p>Lagi eksperimen pakai Docker dan Tiptap, seru banget! 🔧</p>",
-    images: ["/images/sample3.jpg"],
+    images: ["/images/sample1.jpg"],
     audience: "connections",
     date: new Date(Date.now() - 20 * 60 * 1000).toISOString(),
     isLiked: false,
@@ -127,7 +127,7 @@ export const DUMMY_POSTS: TPost[] = [
     <p>Tapi yang paling gua suka hari ini adalah <strong>diskusi bareng warga dev lainnya di komentar 👇</strong> Banyak banget insight & pengalaman dari developer beda level — dari yang baru mulai sampai yang udah expert. Ini yang bikin komunitas digital kita jadi hidup dan sehat 🎯</p>
     <p>#WebDev #PerformanceMatters #NgodingBareng #WargaNegaraVirtual</p>
   `,
-    images: ["/images/sample1.jpg", "/images/sample2.jpg"],
+    images: ["/images/sample3.jpg", "/images/sample2.jpg"],
     audience: "public",
     date: new Date(Date.now() - 60 * 60 * 1000).toISOString(),
     isLiked: false,

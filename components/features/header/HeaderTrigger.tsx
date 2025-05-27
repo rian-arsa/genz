@@ -8,6 +8,7 @@ import {
   URL_POST,
 } from "@/app/(feed)/ClientWrapper";
 import { OrwaSidebar } from "@/containers/ormas";
+import { useEffect } from "react";
 
 interface HeaderTriggerProps {
   isMobile: boolean;
@@ -29,6 +30,10 @@ export const HeaderTrigger = ({ isMobile, activeUrl }: HeaderTriggerProps) => {
     }
     return null;
   };
+
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [activeUrl]);
 
   return (
     <>

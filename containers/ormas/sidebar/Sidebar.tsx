@@ -23,7 +23,7 @@ export default function Sidebar({ isLanding }: TLeftSidebarProps) {
   return (
     <aside
       className="w-full md:w-72 xl:w-80 p-4 space-y-2 pt-20 md:overflow-visible 
-             overflow-y-auto max-h-screen">
+             overflow-y-auto max-h-screen pb-20">
       <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1f1f1f] shadow-sm p-4 space-y-4">
         <div className="flex items-center gap-3">
           <Image
@@ -54,7 +54,7 @@ export default function Sidebar({ isLanding }: TLeftSidebarProps) {
       </div>
 
       <OrganizationSidebarMenu />
-      <OrganizationChat />
+      {/* <OrganizationChat /> */}
       <Organization />
     </aside>
   );
