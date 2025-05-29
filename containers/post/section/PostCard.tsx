@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, JSX } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -8,15 +8,10 @@ import PostActions from "./PostAction";
 import PostHeader from "./PostHeader";
 import PostImageGallery from "./PostImage";
 
-import { PostContentText } from "@/components/ui";
-import { TPost } from "@/app/types/post";
 import { PdfImageSlider, PostVideoPlayer } from "./components";
 
-export const audienceIcons: Record<TPost["audience"], JSX.Element> = {
-  public: <span className="text-xs text-gray-400">🌍</span>,
-  connections: <span className="text-xs text-gray-400">👥</span>,
-  private: <span className="text-xs text-gray-400">🔒</span>,
-};
+import { PostContentText } from "@/components/ui";
+import { TPost } from "@/app/types/post";
 
 interface PostCardProps {
   post: TPost;
@@ -27,7 +22,7 @@ export default function PostCard({ post }: PostCardProps) {
   const [showAllImages, setShowAllImages] = useState(false);
 
   const onClickDetail = () => {
-    router.push(`/pusat-warga/${post.id}`);
+    router.push(`/post/${post.id}`);
   };
 
   return (
@@ -43,7 +38,7 @@ export default function PostCard({ post }: PostCardProps) {
           className="rounded-full object-cover border"
         />
         <div className="flex-1">
-          <PostHeader post={post} audienceIcons={audienceIcons} />
+          <PostHeader post={post} />
           <PostContentText html={post.html} />
           {post.images.length > 0 && (
             <PostImageGallery

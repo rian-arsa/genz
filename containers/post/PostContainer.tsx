@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+
 import PostActions from "@/containers/post/section/PostAction";
-import { audienceIcons } from "@/containers/post/section/PostCard";
 import { PostHeader } from "@/containers/post/section";
 import { DUMMY_POSTS } from "@/dummy/post";
 import PostImageGallery from "@/containers/post/section/PostImage";
@@ -46,7 +46,7 @@ export default function PostDetailClient({ id }: { id: number }) {
           height={40}
           className="rounded-full object-cover border"
         />
-        <PostHeader post={post} audienceIcons={audienceIcons} />
+        <PostHeader post={post} />
       </div>
 
       <div className="mt-8 text-sm text-gray-800 dark:text-gray-200 leading-relaxed prose dark:prose-invert">
