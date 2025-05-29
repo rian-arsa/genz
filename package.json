@@ -29,7 +29,8 @@
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
     "react-swipeable": "^7.0.2",
-    "react-textarea-autosize": "^8.5.9"
+    "react-textarea-autosize": "^8.5.9",
+    "sonner": "^2.0.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.7",

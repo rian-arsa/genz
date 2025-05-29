@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import PostActions from "@/containers/home/section/PostAction";
-import { audienceIcons } from "@/containers/home/section/PostCard";
-import { PostHeader } from "@/containers/home/section";
+import PostActions from "@/containers/post/section/PostAction";
+import { audienceIcons } from "@/containers/post/section/PostCard";
+import { PostHeader } from "@/containers/post/section";
 import { DUMMY_POSTS } from "@/dummy/post";
-import PostImageGallery from "@/containers/home/section/PostImage";
+import PostImageGallery from "@/containers/post/section/PostImage";
 import { PostSkeleton } from "@/components/ui/skeleton";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -32,7 +32,7 @@ export default function PostDetailClient({ id }: { id: number }) {
     <div className="bg-white dark:bg-[#1f1f1f] rounded-xl shadow-sm w-full mx-auto px-6 py-6">
       <div
         className="flex items-center gap-2 cursor-pointer font-semibold hover:text-gray-600 dark:hover:text-gray-400 transition-colors mb-8"
-        onClick={() => router.push("/home")}>
+        onClick={() => router.push("/pusat-warga")}>
         <ArrowLeft className="w-4 h-4 text-gray-800 dark:text-gray-400" />
         <span className="text-base text-gray-800 dark:text-gray-200 ml-2">
           Kembali ke Beranda

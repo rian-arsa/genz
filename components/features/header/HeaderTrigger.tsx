@@ -1,12 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Header, Sidebar } from "@/containers/home";
-import {
-  URL_ORWA,
-  URL_ORWA_LANDING,
-  URL_POST,
-} from "@/app/(feed)/ClientWrapper";
+import { Header, Sidebar } from "@/containers/pusat-warga";
+import { URL_ORWA, URL_POST } from "@/app/(feed)/ClientWrapper";
 import { OrwaSidebar } from "@/containers/ormas";
 import { useEffect } from "react";
 
@@ -24,9 +20,6 @@ export const HeaderTrigger = ({ isMobile, activeUrl }: HeaderTriggerProps) => {
     }
     if (URL_ORWA.some((url) => activeUrl.includes(url))) {
       return <OrwaSidebar isLanding={false} />;
-    }
-    if (activeUrl === URL_ORWA_LANDING) {
-      return <OrwaSidebar isLanding={true} />;
     }
     return null;
   };

@@ -1,6 +1,7 @@
 "use client";
 
-import PostCard, { TPost } from "@/containers/home/section/PostCard";
+import { TPost } from "@/app/types/post";
+import PostCard from "@/containers/post/section/PostCard";
 import { DUMMY_POSTS } from "@/dummy/post";
 import { useState } from "react";
 

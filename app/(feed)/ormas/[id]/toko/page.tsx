@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import OrmasProfilContainer from "@/containers/ormas/toko/TokoOrmasContainer";
+import OrmasTokoContainer from "@/containers/ormas/toko/TokoOrmasContainer";
 
 export const metadata: Metadata = {
   title: "Organisasi Warga | Negara Gen Z",
@@ -27,5 +27,5 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <OrmasProfilContainer />;
+  return <OrmasTokoContainer />;
 }

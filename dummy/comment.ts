@@ -1,4 +1,4 @@
-import { TComment } from "@/containers/home/section/PostComment";
+import { TComment } from "@/containers/post/section/PostComment";
 
 export const DUMMY_COMMENTS: TComment[] = [
   {

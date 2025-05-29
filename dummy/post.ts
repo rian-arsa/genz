@@ -1,4 +1,4 @@
-import { TPost } from "@/containers/home/section/PostCard";
+import { TPost } from "@/app/types/post";
 
 export const DUMMY_POSTS: TPost[] = [
   {
@@ -33,6 +33,7 @@ export const DUMMY_POSTS: TPost[] = [
     },
     html: "<p>Posting anonymously to share something deep... 🫣</p>",
     images: [],
+    video: "/videos/video-example.mp4",
     audience: "private",
     date: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
     isLiked: true,
@@ -52,7 +53,8 @@ export const DUMMY_POSTS: TPost[] = [
       username: "charilie"
     },
     html: "",
-    images: ["/images/sample3.jpg", "/images/sample2.jpg", "/images/sample3.jpg"],
+    images: [],
+    pdf: ["/images/sample3.jpg", "/images/sample2.jpg", "/images/sample3.jpg", "/images/sample2.jpg", "/images/sample3.jpg"],
     audience: "public",
     date: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
     isLiked: false,

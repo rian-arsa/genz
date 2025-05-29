@@ -1,6 +1,6 @@
 "use client";
 
-export type TVerifiedTier = "basic" | "premium" | "admin" | "presiden";
+import { TVerifiedTier } from "@/app/types/post";
 
 interface IVerifiedBadgeInlineProps {
   tier: TVerifiedTier;

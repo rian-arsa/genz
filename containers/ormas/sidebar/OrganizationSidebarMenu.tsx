@@ -1,6 +1,16 @@
 "use client";
 
-import { User, CalendarDays, ShoppingBag, Home, Users } from "lucide-react";
+import {
+  User,
+  CalendarDays,
+  ShoppingBag,
+  Home,
+  Users,
+  ScrollText,
+  Mails,
+  HandCoins,
+  HeartHandshake,
+} from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
 import { SidebarCollapse } from "@/components";
@@ -22,21 +32,31 @@ const menuItems: TMenuItem[] = [
     count: 5, // Example count for members
   },
   {
+    label: "Pesan",
+    icon: <Mails className="w-4 h-4" />,
+    href: "/pesan",
+  },
+  {
     label: "Event",
     icon: <CalendarDays className="w-4 h-4" />,
     href: "event",
     count: 5, // Example count for events
   },
-  // {
-  //   label: "Pesan",
-  //   icon: <ScrollText className="w-4 h-4" />,
-  //   href: "/chat",
-  // },
   {
     label: "Toko",
     icon: <ShoppingBag className="w-4 h-4" />,
     href: "toko",
     count: 3, // Example count for items in the store
+  },
+  // {
+  //   label: "Galang Dana",
+  //   icon: <HandCoins className="w-4 h-4" />,
+  //   href: "galang-dana",
+  // },
+  {
+    label: "Dukungan",
+    icon: <HeartHandshake className="w-4 h-4" />,
+    href: "dukungan",
   },
 ];
 
