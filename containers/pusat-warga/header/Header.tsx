@@ -16,6 +16,7 @@ import {
   LogOut,
   X,
   ShoppingCart,
+  ThumbsUp,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useIsMobile } from "@/context/isMobileContextProvider";
@@ -128,7 +129,12 @@ export default function Header({ setIsShow, isShow }: THeaderProps) {
           <HeaderItemIcon
             IconName={Home}
             onClick={() => handleClickHeaderItem("/pusat-warga")}
-            label="Gosip terbaru"
+            label="Pusat Warga"
+          />
+          <HeaderItemIcon
+            IconName={ThumbsUp}
+            onClick={() => handleClickHeaderItem("/rekomendasi")}
+            label="Rekomendasi GenZ"
           />
           <HeaderItemIcon
             IconName={Users}
