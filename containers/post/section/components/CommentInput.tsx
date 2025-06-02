@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Picker from "@emoji-mart/react";
-import data from "@emoji-mart/data";
 import { Check } from "lucide-react";
 
 export default function CommentInput({
@@ -97,7 +95,7 @@ export default function CommentInput({
 
       {showEmoji && (
         <div className="absolute bottom-14 right-0 z-50">
-          <Picker data={data} onEmojiSelect={addEmoji} theme="light" />
+          <p>TODO: EMOJI</p>
         </div>
       )}
     </div>

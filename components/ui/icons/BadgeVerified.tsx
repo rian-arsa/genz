@@ -1,6 +1,6 @@
 "use client";
 
-import { TVerifiedTier } from "@/app/types/post";
+import { TVerifiedTier } from "@/types/post";
 
 interface IVerifiedBadgeInlineProps {
   tier: TVerifiedTier;

@@ -96,7 +96,7 @@ export default function PostInputBox() {
         />
       )}
 
-      <ModalInputRecommendation onClose={() => {}} />
+      {/* <ModalInputRecommendation onClose={() => {}} /> */}
     </>
   );
 }

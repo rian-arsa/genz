@@ -11,7 +11,7 @@ import PostImageGallery from "./PostImage";
 import { PdfImageSlider, PostVideoPlayer } from "./components";
 
 import { PostContentText } from "@/components/ui";
-import { TPost } from "@/app/types/post";
+import { TPost } from "@/types/post";
 
 interface PostCardProps {
   post: TPost;

@@ -4,7 +4,7 @@ import React, { useState, useCallback } from "react";
 import Link from "next/link";
 import { VerifiedBadge } from "@/components/ui/icons";
 import { timeAgo } from "@/utils/date";
-import { TPost } from "@/app/types/post";
+import { TPost } from "@/types/post";
 
 type TPostHeaderProps = {
   post: TPost;

@@ -1,4 +1,4 @@
-import { TPost } from "@/app/types/post";
+import { TPost } from "@/types/post";
 
 export const DUMMY_POSTS: TPost[] = [
   {

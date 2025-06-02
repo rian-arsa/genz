@@ -15,8 +15,6 @@ import {
   Smile,
   Quote,
 } from "lucide-react";
-import Picker from "@emoji-mart/react";
-import data from "@emoji-mart/data";
 import FloatingLinkInput from "./FloatingLinkInput";
 
 interface TiptapEditorProps {
@@ -180,14 +178,7 @@ export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
 
       {showEmoji && (
         <div className="fixed bottom-24 left-6 z-[9999]">
-          <Picker
-            data={data}
-            onEmojiSelect={(emoji: any) => {
-              editor.chain().focus().insertContent(emoji.native).run();
-              setShowEmoji(false);
-            }}
-            theme="auto"
-          />
+          <p>TODO: EMOJI</p>
         </div>
       )}
     </div>

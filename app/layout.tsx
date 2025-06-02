@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ThemeProvider from "@/context/themeContextProvider";
-import { IsMobileProvider } from "@/context/isMobileContextProvider";
-import { Toaster } from "sonner";
+import Providers from "@/containers/LayoutContainer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,27 +21,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
       suppressHydrationWarning
       className="bg-zinc-50 dark:bg-zinc-950">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}>
-        <Toaster richColors position="top-right" />
-
-        <IsMobileProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange>
-            {children}
-          </ThemeProvider>
-        </IsMobileProvider>
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

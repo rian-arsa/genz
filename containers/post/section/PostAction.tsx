@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import PostComment from "./PostComment";
 import { PostActionItem } from "./components";
-import { TPost } from "@/app/types/post";
+import { TPost } from "@/types/post";
 
 type PostActionProps = TPost & {
   isDetail?: boolean;

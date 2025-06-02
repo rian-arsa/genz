@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import { TPost } from "@/app/types/post";
+import { TPost } from "@/types/post";
 import { PostCard } from "@/containers/post/section";
 
 import { DUMMY_POSTS } from "@/dummy/post";
