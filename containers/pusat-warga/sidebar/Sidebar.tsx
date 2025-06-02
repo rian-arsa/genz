@@ -3,15 +3,18 @@
 import Image from "next/image";
 import { BadgeCheck, CalendarHeart, Gift } from "lucide-react";
 import { SidebarCollapse } from "@/components";
+import { useUserStore } from "@/store";
 
 export type TLeftSidebarProps = {};
 
 export default function Sidebar() {
+  const user = useUserStore((s) => s.user);
+
   const ProfileSidebar = (
     <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1f1f1f] shadow-sm p-4 space-y-4">
       <div className="flex items-center gap-3">
         <Image
-          src="/images/avatar1.jpg"
+          src={user?.avatar_url || "/images/profil/default_avatar_male.png"}
           alt="Avatar"
           width={48}
           height={48}
@@ -19,20 +22,27 @@ export default function Sidebar() {
         />
         <div>
           <p className="text-sm font-semibold text-gray-900 dark:text-white flex items-center gap-1">
-            Budi LinkedIn
-            <BadgeCheck className="w-4 h-4 text-primary" />
+            {user?.name || "Warga Negara Gen Z"}
+            {user?.verified_status && (
+              <BadgeCheck className="text-blue-500 w-4 h-4" />
+            )}
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            Warga Aktif
-          </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            Jakarta, Negara Gen Z
+            @{user?.username || "warga_gen_z"}
           </p>
         </div>
       </div>
+      <div>
+        <p className="text-xs text-gray-700 dark:text-gray-300">
+          {user?.bio ||
+            "Selamat datang di Negara Gen Z! Tempatnya kita berbagi cerita, berdiskusi, dan berkolaborasi."}
+        </p>
+      </div>
       <div className="text-center border-t border-gray-100 dark:border-gray-800 pt-4">
-        <p className="text-xs text-gray-500 dark:text-gray-400">Dompet Saya</p>
-        <p className="text-2xl font-bold text-primary pt-2">💰 1,240</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">Poin Saya</p>
+        <p className="text-2xl font-bold text-primary pt-2">
+          💰 {user?.points}
+        </p>
       </div>
       <div className="text-center space-x-2">
         <button className="text-xs font-medium text-primary hover:underline cursor-pointer">

@@ -1,7 +1,7 @@
 // lib/auth.ts
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "@/lib/axios"; // axios custom instance
+import { axiosBase } from "@/lib/axios/base"; // axios custom instance
 import { TResponse } from "@/types/apiType";
 import { TLogin } from "@/types/auth/user";
 
@@ -15,9 +15,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-          console.log(credentials)
-
-          const res = await axios.post<TResponse<TLogin>>("/api/auth/login", {
+          const res = await axiosBase.post<TResponse<TLogin>>("/api/auth/login", {
             email: credentials?.email,
             password: credentials?.password,
           })

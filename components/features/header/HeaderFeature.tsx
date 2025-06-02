@@ -6,6 +6,7 @@ import {
   THeaderItemProfil,
   TNotifItem,
 } from "@/components/ui";
+import { useLogoutMutation } from "@/services/auth/mutation";
 import { useRouter } from "next/navigation";
 
 type THeaderNotifProps = {
@@ -33,8 +34,16 @@ type THeaderProfilProps = {
 
 export const HeaderProfil = ({ menus }: THeaderProfilProps) => {
   const router = useRouter();
+  const { mutate: logout, isPending } = useLogoutMutation();
 
   const handleMenuClick = (menu: THeaderItemProfil) => {
+    if (menu.label === "Keluar") {
+      logout();
+      if (isPending) return; // Prevent multiple clicks while pending
+      router.push("/auth/login");
+      return;
+    }
+
     router.push(menu.url);
   };
 

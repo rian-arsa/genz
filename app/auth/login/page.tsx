@@ -32,7 +32,10 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div
+      className="min-h-screen flex items-center justify-center 
+                    transition-colors duration-300 
+                    bg-zinc-100 dark:bg-zinc-900 px-4">
       <LoginForm />
     </div>
   );

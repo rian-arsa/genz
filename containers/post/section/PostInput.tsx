@@ -5,12 +5,15 @@ import Image from "next/image";
 import PostModal from "./components/PostModal";
 import { FileText, ImageIcon, ThumbsUp, Video } from "lucide-react";
 import { ModalInputRecommendation } from "./components";
+import { useUserStore } from "@/store";
 
 export default function PostInputBox() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [html, setHtml] = useState("");
   const [files, setFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const user = useUserStore((s) => s.user);
 
   const handleFileChange = useCallback((newFiles: File[]) => {
     setFiles(newFiles);
@@ -35,7 +38,7 @@ export default function PostInputBox() {
       <div className="relative w-full overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-white to-gray-50 dark:from-[#1f1f1f] dark:to-[#232323] shadow-md p-4 hover:shadow-lg transition-shadow mb-4">
         <div className="flex items-center gap-4">
           <Image
-            src="/images/avatar1.jpg"
+            src={user?.avatar_url || "/images/profil/default_avatar_male.png"}
             alt="User Avatar"
             width={48}
             height={48}
