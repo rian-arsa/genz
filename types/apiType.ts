@@ -3,3 +3,8 @@ export type TResponse<T> = {
   message: string,
   data: T
 }
+
+export type Response = {
+  success: boolean,
+  message: string,
+}

@@ -1,5 +1,7 @@
 // ✅ api.ts
 import { axiosBase } from "@/lib/axios/base";
+import { TResponse } from "@/types/apiType";
+import axiosInstance from "@/lib/axios/axiosInstance";
 
 // ================= REGISTER ====================
 
@@ -43,3 +45,16 @@ export const logoutUser = async (payload: LogoutPayload): Promise<LogoutResponse
   const res = await axiosBase.post<LogoutResponse>("/api/auth/logout", payload);
   return res.data;
 };
+
+// ================= USER DETAIL ====================
+export interface UserDetail {
+  following: number;
+  followers: number;
+}
+
+export const getUserDetail = async (): Promise<TResponse<UserDetail>> => {
+  const res = await axiosInstance.get<TResponse<UserDetail>>(`/api/auth/me-detail`);
+  return res.data;
+}
+
+

@@ -35,7 +35,7 @@ const MENUS_PROFIL: THeaderItemProfil[] = [
   {
     icon: <User className="w-4 h-4" />,
     label: "Profil Saya",
-    url: "/profile",
+    url: "/profil",
   },
   {
     icon: <Settings className="w-4 h-4" />,

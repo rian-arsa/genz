@@ -13,8 +13,6 @@ export const useLogoutMutation = () => {
   const { data: session } = useSession();
   const token = session?.refreshToken || "";
 
-  console.log("useLogoutMutation token:", session);
-
   return useMutation({
     mutationFn: async () => {
       await logoutUser({ refreshToken: token });
