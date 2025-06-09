@@ -4,26 +4,48 @@ import {
   HeaderItemProfil,
   HeaderNotifItem,
   THeaderItemProfil,
-  TNotifItem,
 } from "@/components/ui";
 import { useLogoutMutation } from "@/services/auth/mutation";
+import { useQueryGetNotificationHeader } from "@/services/notifications/query";
+import { resetAllStores } from "@/store";
 import { useRouter } from "next/navigation";
 
-type THeaderNotifProps = {
-  notifs: TNotifItem[];
-};
+export const HeaderNotif = () => {
+  const { data, isLoading } = useQueryGetNotificationHeader();
 
-export const HeaderNotif = ({ notifs }: THeaderNotifProps) => {
   return (
     <div className="absolute right-12 top-12 w-64 bg-white dark:bg-zinc-800 shadow-lg rounded-md p-3 z-50 text-sm">
-      <p className="text-zinc-700 dark:text-zinc-200 font-semibold mb-2">
+      <p className="text-base text-zinc-700 dark:text-zinc-200 font-semibold">
         Notifications
       </p>
-      <ul className="flex flex-col gap-2">
-        {notifs.map((notif) => (
-          <HeaderNotifItem key={notif.id} {...notif} />
-        ))}
-      </ul>
+      {isLoading ? (
+        <p className="text-zinc-500 dark:text-zinc-400 mt-2">Loading...</p>
+      ) : (
+        <>
+          {data && data.data.unreadCount > 0 && (
+            <p className="text-zinc-500 dark:text-zinc-400 mb-3">
+              Ada {data?.data?.unreadCount || 0} notif nganggur belum dibaca!
+            </p>
+          )}
+          <ul className="flex flex-col gap-2">
+            {(data?.data?.notifications?.length ?? 0) > 0 &&
+              data?.data?.notifications?.map((notif) => (
+                <HeaderNotifItem key={notif.id} {...notif} />
+              ))}
+          </ul>
+          {data?.data?.notifications.length === 0 && (
+            <p className="text-zinc-500 dark:text-zinc-400 text-center">
+              Tidak ada notifikasi baru
+            </p>
+          )}
+        </>
+      )}
+
+      <button
+        onClick={() => console.log("Clicked: Mark all notifications as read")}
+        className="mt-3 w-full text-center text-pink-500 hover:text-pink-600 dark:hover:text-pink-400 transition-colors">
+        Lihat Semua Notifikasi
+      </button>
     </div>
   );
 };

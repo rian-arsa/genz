@@ -1,34 +1,35 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React from "react";
 import Link from "next/link";
 import { VerifiedBadge } from "@/components/ui/icons";
 import { timeAgo } from "@/utils/date";
-import { TPost } from "@/types/post";
+import { Post } from "@/types/post/post";
+import { useMutationFollow } from "@/services/follow/mutation";
+
+import { useQueryClient } from "@tanstack/react-query";
 
 type TPostHeaderProps = {
-  post: TPost;
+  post: Post;
 };
 
 const PostHeader: React.FC<TPostHeaderProps> = ({ post }) => {
-  const [tempFollowing, setTempFollowing] = useState<boolean>(
-    post.author.isFollowing
-  );
+  const mutationFollow = useMutationFollow(post.id);
 
-  const handleFollow = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.stopPropagation();
-      setTempFollowing((prev) => !prev);
-      // TODO: API call follow/unfollow
-    },
-    []
-  );
+  const handleFollow = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    mutationFollow.mutate(post.userId);
+  };
 
   const renderFollowButton = () => {
     const baseClass =
       "text-xs font-medium px-4 py-1.5 rounded-full transition-colors duration-200";
 
-    return tempFollowing ? (
+    if (post.isOwner) {
+      return null;
+    }
+
+    return post.isFollowing ? (
       <button
         onClick={handleFollow}
         className={`${baseClass} bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-100 hover:bg-zinc-300 dark:hover:bg-zinc-600 flex items-center gap-1`}>
@@ -47,20 +48,22 @@ const PostHeader: React.FC<TPostHeaderProps> = ({ post }) => {
     <div className="flex items-center justify-between w-full">
       <div className="flex flex-col">
         <Link
-          href={`/profil/${post.author.username}`}
+          href={`/profil/${post.user.username}`}
           onClick={(e) => e.stopPropagation()}
           className="text-sm text-gray-900 dark:text-white font-bold hover:underline flex items-center gap-1">
-          {post.author.name}
-          {post.author.badge && <VerifiedBadge tier={post.author.badge} />}
+          {post.user.name}
+          {post.user.verifiedStatus && (
+            <VerifiedBadge tier={post.user.verifiedStatus} />
+          )}
         </Link>
 
         <div className="flex items-center gap-2">
           <span className="text-xs text-gray-500 dark:text-gray-400">
-            {post.author.status}
+            {post.user.role}
           </span>
           <span> | </span>
           <span className="text-xs text-gray-500 dark:text-gray-400">
-            {timeAgo(post.date)}
+            {timeAgo(post.createdAt)}
           </span>
         </div>
       </div>

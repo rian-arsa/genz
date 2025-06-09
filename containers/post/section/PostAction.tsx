@@ -11,9 +11,10 @@ import {
 import { useState } from "react";
 import PostComment from "./PostComment";
 import { PostActionItem } from "./components";
-import { TPost } from "@/types/post";
+import { Post } from "@/types/post/post";
+import { usePostLikeMutation } from "@/services/post/mutation";
 
-type PostActionProps = TPost & {
+type PostActionProps = Post & {
   isDetail?: boolean;
 };
 
@@ -31,14 +32,22 @@ export default function PostAction({
   const [openComment, setOpenComment] = useState<boolean>(isDetail);
   const [tempLikeCount, setTempLikeCount] = useState<number>(likeCount || 0);
 
+  const { mutate: toggleLike } = usePostLikeMutation();
+
   const handleLike = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setTempLike((prev) => {
-      setTempLikeCount((count) => (prev ? count - 1 : count + 1));
-      return !prev;
-    });
 
-    // TODO: Call API to update like
+    const prevTempLike = tempLike;
+    setTempLike(!prevTempLike);
+    setTempLikeCount((count) => (prevTempLike ? count - 1 : count + 1));
+
+    toggleLike(id, {
+      onError: () => {
+        // rollback
+        setTempLike(prevTempLike);
+        setTempLikeCount((count) => (prevTempLike ? count + 1 : count - 1));
+      },
+    });
   };
 
   const handleComment = (e: React.MouseEvent) => {

@@ -33,14 +33,18 @@ function useSingleDropzone({
 
 interface MultiFileUploaderProps {
   onFilesChange: (files: File[]) => void;
+  loading: boolean;
 }
 
-export function MultiFileUploader({ onFilesChange }: MultiFileUploaderProps) {
+export function MultiFileUploader({
+  onFilesChange,
+  loading,
+}: MultiFileUploaderProps) {
   const [files, setFiles] = useState<FilePreview[]>([]);
 
   const handleDrop = useCallback(
     (type: "image" | "video" | "pdf", acceptedFiles: File[]) => {
-      const maxFileSize = 10 * 1024 * 1024; // 10MB
+      const maxFileSize = 100 * 1024 * 1024; // 100MB
       const validFiles: FilePreview[] = [];
 
       for (const file of acceptedFiles) {
@@ -53,8 +57,8 @@ export function MultiFileUploader({ onFilesChange }: MultiFileUploaderProps) {
 
         if (
           (type === "image" && !fileType.startsWith("image/")) ||
-          (type === "video" && !fileType.startsWith("video/")) ||
-          (type === "pdf" && fileType !== "application/pdf")
+          (type === "video" && !fileType.startsWith("video/"))
+          // (type === "pdf" && fileType !== "application/pdf")
         ) {
           toast.error(
             `"${file.name}" bukan file ${type.toUpperCase()} yang valid`
@@ -122,10 +126,10 @@ export function MultiFileUploader({ onFilesChange }: MultiFileUploaderProps) {
     accept: { "video/*": [] },
     onDrop: (files) => handleDrop("video", files),
   });
-  const pdfDropzone = useSingleDropzone({
-    accept: { "application/pdf": [] },
-    onDrop: (files) => handleDrop("pdf", files),
-  });
+  // const pdfDropzone = useSingleDropzone({
+  //   accept: { "application/pdf": [] },
+  //   onDrop: (files) => handleDrop("pdf", files),
+  // });
 
   return (
     <div className="mt-4">
@@ -146,14 +150,14 @@ export function MultiFileUploader({ onFilesChange }: MultiFileUploaderProps) {
           <Video className="w-4 h-4 text-pink-600 dark:text-pink-300" />
           <span>Video</span>
         </button>
-        <button
+        {/* <button
           onClick={() => {
             pdfDropzone.open();
           }}
           className="flex items-center gap-1 px-3 py-1.5 text-xs border rounded-md text-pink-600 dark:text-pink-300 border-pink-300 dark:border-pink-600 hover:bg-pink-100 dark:hover:bg-pink-800 transition">
           <FileText className="w-4 h-4 text-pink-600 dark:text-pink-300" />
           <span>PDF</span>
-        </button>
+        </button> */}
       </div>
 
       {/* Dropzone hidden input (agar tetap bisa drag and drop) */}
@@ -163,9 +167,9 @@ export function MultiFileUploader({ onFilesChange }: MultiFileUploaderProps) {
       <div {...videoDropzone.getRootProps()} className="hidden">
         <input {...videoDropzone.getInputProps()} />
       </div>
-      <div {...pdfDropzone.getRootProps()} className="hidden">
+      {/* <div {...pdfDropzone.getRootProps()} className="hidden">
         <input {...pdfDropzone.getInputProps()} />
-      </div>
+      </div> */}
 
       {files.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
@@ -196,11 +200,13 @@ export function MultiFileUploader({ onFilesChange }: MultiFileUploaderProps) {
                 <div className="p-4 text-xs text-center">Unsupported file</div>
               )}
 
-              <button
-                onClick={() => removeFile(index)}
-                className="absolute top-1 right-1 text-xs bg-black/60 text-white px-2 py-1 rounded transition">
-                <X className="w-4 h-4" />
-              </button>
+              {!loading && (
+                <button
+                  onClick={() => removeFile(index)}
+                  className="absolute top-1 right-1 text-xs bg-black/60 text-white px-2 py-1 rounded transition">
+                  <X className="w-4 h-4" />
+                </button>
+              )}
             </div>
           ))}
         </div>

@@ -1,25 +1,20 @@
 "use client";
 
+import { Notification } from "@/services/notifications/type";
 import { timeAgo } from "@/utils/date";
 import { BellDot } from "lucide-react"; // atau pakai ikon lain sesuai konteks
 import Link from "next/link";
 
-// HeaderNotifItem
-export type TNotifItem = {
-  id: string;
-  message: string;
-  isRead: boolean;
-  timestamp?: string;
-  url: string;
-};
-
 export const HeaderNotifItem = ({
   id,
-  url,
-  message,
+  userId,
+  category,
+  action,
+  title,
+  body,
   isRead = false,
-  timestamp,
-}: TNotifItem) => {
+  createdAt,
+}: Notification) => {
   return (
     <li
       key={id}
@@ -33,17 +28,23 @@ export const HeaderNotifItem = ({
       </div>
 
       <div className="flex-1">
-        <Link href={url} className="block">
+        <Link href={"#"} className="block">
           <p
             className={`text-sm leading-snug ${
               isRead ? "text-zinc-400" : "text-zinc-800 dark:text-white"
             }`}>
-            {message}
+            {title}
+          </p>
+          <p
+            className={`text-xs leading-snug ${
+              isRead ? "text-zinc-400" : "text-zinc-800 dark:text-white"
+            }`}>
+            {body}
           </p>
         </Link>
-        {timestamp && (
+        {createdAt && (
           <p className="text-xs text-zinc-400 mt-1 group-hover:underline">
-            {timeAgo(timestamp)}
+            {timeAgo(createdAt)}
           </p>
         )}
       </div>

@@ -6,15 +6,13 @@ import { PostInput, PostList } from "../post/section";
 import { FeedSortDropdown } from "../post/section/components";
 
 const HomeContainer = () => {
-  const [sortOption, setSortOption] = useState("top");
+  const [option, setOption] = useState("fyp");
+
   return (
     <>
       <PostInput />
-      <FeedSortDropdown
-        value={sortOption}
-        onChange={(val) => setSortOption(val)}
-      />
-      <PostList />
+      <FeedSortDropdown value={option} onChange={(val) => setOption(val)} />
+      <PostList option={option} />
     </>
   );
 };

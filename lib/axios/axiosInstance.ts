@@ -16,6 +16,13 @@ instance.interceptors.request.use((config) => {
     config.headers = config.headers || {};
     config.headers.Authorization = `Bearer ${token}`;
   }
+
+  // Jika config memiliki data berupa FormData, ubah Content-Type menjadi multipart/form-data
+  if (config.data instanceof FormData) {
+    config.headers = config.headers || {};
+    config.headers["Content-Type"] = "multipart/form-data";
+  }
+
   return config;
 });
 
@@ -37,16 +44,18 @@ instance.interceptors.response.use(
 
       try {
         interface RefreshTokenResponse {
-          access_token: string;
+          success: boolean;
+          message: string;
+          data: {
+            access_token: string;
+          };
         }
 
         const response = await axios.post<RefreshTokenResponse>(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/refresh-token`, {
           refreshToken, // dikirim via body
         });
 
-        console.log("New access token:", response.data.access_token);
-
-        const newAccessToken = response.data.access_token;
+        const newAccessToken = response.data.data.access_token;
         setAccessToken(newAccessToken);
 
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;

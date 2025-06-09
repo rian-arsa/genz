@@ -178,7 +178,7 @@ export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
 
       {showEmoji && (
         <div className="fixed bottom-24 left-6 z-[9999]">
-          <p>TODO: EMOJI</p>
+          {/* <p>TODO: EMOJI</p> */}
         </div>
       )}
     </div>

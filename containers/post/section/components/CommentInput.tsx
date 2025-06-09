@@ -95,7 +95,7 @@ export default function CommentInput({
 
       {showEmoji && (
         <div className="absolute bottom-14 right-0 z-50">
-          <p>TODO: EMOJI</p>
+          {/* <p>TODO: EMOJI</p> */}
         </div>
       )}
     </div>

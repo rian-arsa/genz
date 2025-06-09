@@ -30,5 +30,5 @@ export const metadata = {
 
 export default async function Page({ params }: PostDetailPageProps) {
   const { id } = await params;
-  return <PostDetailClient id={parseInt(id)} />;
+  return <PostDetailClient id={id} />;
 }

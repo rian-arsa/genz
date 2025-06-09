@@ -15,7 +15,7 @@ export const useLogoutMutation = () => {
 
   return useMutation({
     mutationFn: async () => {
-      await logoutUser({ refreshToken: token });
+      logoutUser({ refreshToken: token });
       resetAllStores();
       await signOut({ callbackUrl: "/auth/login" });
     },

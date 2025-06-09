@@ -4,10 +4,11 @@ import { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 
 const options = [
-  { label: "Untukmu", value: "top" },
+  { label: "Untukmu", value: "fyp" },
   { label: "Terbaru", value: "recent" },
-  { label: "Anonim", value: "anonim" },
-  { label: "Ormas", value: "ormas" },
+  { label: "Anonim", value: "anon" },
+  { label: "Ormas", value: "community" },
+  { label: "Tetangga", value: "neighbors" },
 ];
 
 export function FeedSortDropdown({

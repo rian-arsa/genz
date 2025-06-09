@@ -1,5 +1,6 @@
 "use client";
 
+import { useNotificationSocket } from "@/hooks/useSocket";
 import { useAuthStore, useUserStore } from "@/store";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
@@ -13,6 +14,8 @@ export default function SessionBridge() {
   const setAccessToken = useAuthStore((s) => s.setAccessToken);
   const setRefreshToken = useAuthStore((s) => s.setRefreshToken);
   const clearAuth = useAuthStore((s) => s.reset);
+
+  useNotificationSocket();
 
   useEffect(() => {
     if (status === "authenticated" && session?.user) {

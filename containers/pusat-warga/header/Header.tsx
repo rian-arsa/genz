@@ -28,7 +28,6 @@ import {
   THeaderItemProfil,
 } from "@/components/ui";
 import { HeaderNotif, HeaderProfil } from "@/components/features";
-import { dummyNotifItems } from "@/dummy/notif";
 import { useRouter } from "next/navigation";
 
 const MENUS_PROFIL: THeaderItemProfil[] = [
@@ -173,8 +172,9 @@ export default function Header({ setIsShow, isShow }: THeaderProps) {
           itemRef={notifRef}
           showDropdown={showNotifDropdown}
           setShowDropdown={setShowNotifDropdown}
-          IconName={Bell}>
-          {showNotifDropdown && <HeaderNotif notifs={dummyNotifItems} />}
+          IconName={Bell}
+          total={12}>
+          {showNotifDropdown && <HeaderNotif />}
         </HeaderItem>
 
         {/* User */}

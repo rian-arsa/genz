@@ -6,6 +6,8 @@ import PostModal from "./components/PostModal";
 import { FileText, ImageIcon, ThumbsUp, Video } from "lucide-react";
 import { ModalInputRecommendation } from "./components";
 import { useUserStore } from "@/store";
+import { usePostMutation } from "@/services/post/mutation";
+import { toast } from "sonner";
 
 export default function PostInputBox() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,6 +17,8 @@ export default function PostInputBox() {
 
   const user = useUserStore((s) => s.user);
 
+  const postMutation = usePostMutation();
+
   const handleFileChange = useCallback((newFiles: File[]) => {
     setFiles(newFiles);
   }, []);
@@ -22,13 +26,31 @@ export default function PostInputBox() {
   const handleSubmit = useCallback(
     (isAnonymous: boolean) => {
       setLoading(true);
-      // Simulasi submit, ganti dengan API call
-      setTimeout(() => {
-        setHtml("");
-        setFiles([]);
-        setLoading(false);
-        setIsModalOpen(false);
-      }, 1500);
+
+      postMutation.mutate(
+        {
+          text: html,
+          media: files,
+          isAnonymous: isAnonymous,
+        },
+        {
+          onSuccess: () => {
+            setHtml("");
+            setFiles([]);
+            setIsModalOpen(false);
+            setLoading(false);
+
+            toast("🚀 Post-mu lagi meluncur!", {
+              description: "Santuy, gue kabarin kalo udah kelar.",
+            });
+          },
+          onError: (error) => {
+            console.error("Error posting:", error);
+            toast.error("😵‍💫 Aduh, post-an gagal naik! Coba ulang ya.");
+            setLoading(false);
+          },
+        }
+      );
     },
     [files, html]
   );
@@ -67,14 +89,14 @@ export default function PostInputBox() {
             <Video className="w-4 h-4 " />
             <span className="hidden sm:block">Video</span>
           </button>
-          <button
+          {/* <button
             onClick={() => {
               setIsModalOpen(true);
             }}
             className="flex items-center gap-1 px-3 py-1.5 text-xs border rounded-md text-gray-700 dark:text-gray-200 ">
             <FileText className="w-4 h-4 " />
             <span className="hidden sm:block">PDF</span>
-          </button>
+          </button> */}
           <button
             onClick={() => {
               setIsModalOpen(true);
